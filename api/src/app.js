@@ -1,17 +1,17 @@
 const express = require('express');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
+const cookieParser = require('cookie-parser'); //NO SE QUE HACE
+const bodyParser = require('body-parser'); //NO SE QUE HACE
+const morgan = require('morgan'); //NO SE QUE HACE
 const routes = require('./routes/index.js');
 
 require('./db.js');
 
 const server = express();
 
-server.name = 'API';
+server.name = 'API'; //Para que ponemos nombre?
 
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
-server.use(bodyParser.json({ limit: '50mb' }));
+server.use(bodyParser.json({ limit: '50mb' })); //Middleware de Json?
 server.use(cookieParser());
 server.use(morgan('dev'));
 server.use((req, res, next) => {
