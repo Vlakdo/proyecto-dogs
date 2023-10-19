@@ -1,13 +1,41 @@
-//const axios = require("axios");
+require('dotenv').config();
+const axios = require("axios");
+//const { response } = require('express');
 
-const URL = "https://rickandmortyapi.com/api/character/";
+const URL = "https://api.thedogapi.com/v1/";
 
-function getDogs(req, res) {
-    try {
+const { DOG_API_KEY } = process.env;
+
+const getDogs = async (req, res) => {
+  try {
+    const response = await axios(URL + "breeds?api_key=" + DOG_API_KEY);
+
+    return res.status(200).send(response.data);
+
+  } catch (error) {
+      res.status(500).send("getDogs not found");
+  }
+
+  /*try {
+    const response = await fetch("https://api.thedogapi.com/v1/breeds?api_key=live_fPmyMAMheszMOOTPw0ANh4MqLhRXNS2kfHaUDTBETtlz1W9uuEZ846vopnZRXF8h");
+
+    const auxData = await response.json();
+    
+    return res.status(200).send(auxData);
+    //return res.status(200).send(response);
+
+  } catch (error) {
+      res.status(500).send("getDogs not found");
+  }*/
+    /*fetch("https://api.thedogapi.com/v1/breeds?api_key=live_fPmyMAMheszMOOTPw0ANh4MqLhRXNS2kfHaUDTBETtlz1W9uuEZ846vopnZRXF8h")
+    .then((response) => response.json())
+    .then((data) => res.status(200).send(data))
+    .catch((error) => res.status(500).send("getDogs not found"));*/
+    /*try {
         res.status(200).send("res: getDogs");
     } catch (error) {
         res.status(500).send("getDogs not found");
-    }
+    }*/
   /*const { id } = req.params;
   axios
     .get(URL + id).then((response) => {
