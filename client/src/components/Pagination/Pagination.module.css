@@ -1,0 +1,14 @@
+.buttonSelect {
+    background-color: green;
+    color: rgb(0, 0, 0);
+}
+
+.button {
+    background-color: white;
+    color:black;
+}
+
+.button:hover {
+    background-color: blue;
+    color: aliceblue;
+}

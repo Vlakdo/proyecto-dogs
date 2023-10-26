@@ -1,0 +1,20 @@
+.NavBarContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #b8f7ff;
+    margin: 10px;
+    padding: 20px auto;
+}
+
+.NavBarFilters {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 10px auto;
+    padding: 20px auto;
+}
+
+.NavBarFilters div {
+    margin: 10px 10px;
+}

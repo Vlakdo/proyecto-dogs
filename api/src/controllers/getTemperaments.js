@@ -30,25 +30,35 @@ const UnifyTemperamentsAndDeleteDuplicates = (temperamentsArray) => {
 
 const getTemperaments = async (req, res) => {
     try {
-        const response = await axios(URL + "breeds?api_key=" + DOG_API_KEY);
+        const temperamentsResult = await Temperaments.findAll();
+        console.log("Result 1: " + temperamentsResult.length);
+        if(temperamentsResult.length === 0) {
+            console.log("Entro y creo: ");
+            const response = await axios(URL + "breeds?api_key=" + DOG_API_KEY);
+            const dogsArray = response.data;
+            const auxTemperaments = dogsArray.map(dog => dog.temperament);
 
-        const dogsArray = response.data;
-        const auxTemperaments = dogsArray.map(dog => dog.temperament);
+            let auxArray = [];
+            await UnifyTemperamentsAndDeleteDuplicates(auxTemperaments)
+            .then((result) => {
+                auxArray = result;
+            })
+            .catch((error) => console.log(error));
 
-        let auxArray = [];
-        await UnifyTemperamentsAndDeleteDuplicates(auxTemperaments)
-        .then((result) => {
-            auxArray = result;
-        })
-        .catch((error) => console.log(error));
+            auxTemperamentsResult = await Temperaments.bulkCreate(auxArray);
+            console.log("Result 2: " + auxTemperamentsResult.length);
+            res.status(200).send(auxTemperamentsResult);
+        }
+        else
+        {
+            console.log("Result 3: " + temperamentsResult.length);
 
-        const temperamentsResult = await Temperaments.bulkCreate(auxArray);
+            res.status(200).send(temperamentsResult);
+        }
 
         /*auxArray.sort(function(a,b){
             return a.localeCompare(b);
         });*/
-
-        res.status(200).send(temperamentsResult);
 
     } catch (error) {
         res.status(500).send("getTemperaments not found");

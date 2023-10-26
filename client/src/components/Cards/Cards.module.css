@@ -1,0 +1,36 @@
+.cardsContainer {
+    display: flex;
+    flex-direction: column;
+    max-width: 1500px;
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px auto;
+    /*display: grid;
+    gap: 12px;
+    grid-template-rows: 1fr 1fr;
+    margin: 20px auto;
+    max-width: 1500px;
+    width: 90%;
+    padding: 40px auto;*/
+    /*display: flex;
+    margin-left: 2em;
+    margin-right: 2em;
+    flex-wrap: wrap;
+    justify-content: flex-start;*/
+    /*display: flex;
+    justify-content: center;
+    align-items: center;*/
+}
+
+.cards {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /*display: flex;
+    flex-wrap: wrap;*/
+    /*flex-direction: column;*/
+    /*margin-left: 2em;
+    margin-right: 2em;
+    margin-top: 3em;
+    justify-content: flex-start;*/
+  }
