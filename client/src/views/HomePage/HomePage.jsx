@@ -1,7 +1,7 @@
-import style from "./HomePage.module.css"
+import style from "./HomePage.module.css";
 import NavBar from "../../components/Nav/NavBar"
 import Cards from "../../components/Cards/Cards";
-import { useState } from 'react';
+/*import { useState } from 'react';*/
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { getDogs, getDogsByName, setFilters } from "../../Redux/actions";
@@ -10,7 +10,7 @@ const HomePage = () => {
 
     //const [dogs, setDogs] = useState([]);
     const dogs = useSelector((state) => state.allDogs);
-    const filterObject = useSelector((state) => state.filterObject);
+    /*const filterObject = useSelector((state) => state.filterObject);*/
     //const [aux, setAux] = useState();
     const dispatch = useDispatch();
 

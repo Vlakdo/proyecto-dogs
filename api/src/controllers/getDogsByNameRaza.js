@@ -1,6 +1,6 @@
 require('dotenv').config();
 const axios = require("axios");
-const { Dogs } = require("../db");
+const { Dogs, Temperaments } = require("../db");
 const { DOG_API_KEY } = process.env;
 
 const { Op } = require("sequelize");
@@ -20,15 +20,45 @@ const getDogsByNameRaza = async (req, res) => {
                 name: {
                     [Op.iLike]: `%${name}%`
                 }
+            },
+            include: {
+                model: Temperaments,
+                attributes: ["name"],
+                through: {
+                    attributes: []
+                }
             }
         });
 
-        const totalDogsArray = [...dogsArray, ...my_DB_Dogs];
+        if(my_DB_Dogs.length){
+            const auxDbDogs = my_DB_Dogs.map((dog) => {
+                return {
+                weight: dog.weight,
+                height: dog.height,
+                id: dog.id,
+                name: dog.name,
+                life_span: dog.life_span,
+                //temperament: dog.temperaments[0].name,//dog.Temperaments.join(", ")
+                temperament: dog.temperaments.map((tempe) => {
+                    return tempe.name;
+                }).join(", "),
+                image: {url: dog.image},
+                isDataBase: true
+                };
+            });
+    
+        
+            const auxData = [...auxDbDogs, ...dogsArray];
 
-        if(totalDogsArray.length > 0){
-            return res.status(200).send(totalDogsArray);
-        } else {
-            return  res.status(404).send("Raza no encontrado");
+            return res.status(200).send(auxData);
+        }
+        else
+        {
+            if(dogsArray.length > 0){
+                return res.status(200).send(dogsArray);
+            } else {
+                return  res.status(404).send("Raza no encontrado");
+            }
         }
 
     } catch (error) {

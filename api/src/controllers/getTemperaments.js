@@ -31,9 +31,9 @@ const UnifyTemperamentsAndDeleteDuplicates = (temperamentsArray) => {
 const getTemperaments = async (req, res) => {
     try {
         const temperamentsResult = await Temperaments.findAll();
-        console.log("Result 1: " + temperamentsResult.length);
+        //console.log("Result 1: " + temperamentsResult.length);
         if(temperamentsResult.length === 0) {
-            console.log("Entro y creo: ");
+            //console.log("Entro y creo: ");
             const response = await axios(URL + "breeds?api_key=" + DOG_API_KEY);
             const dogsArray = response.data;
             const auxTemperaments = dogsArray.map(dog => dog.temperament);
@@ -46,12 +46,12 @@ const getTemperaments = async (req, res) => {
             .catch((error) => console.log(error));
 
             auxTemperamentsResult = await Temperaments.bulkCreate(auxArray);
-            console.log("Result 2: " + auxTemperamentsResult.length);
+            //console.log("Result 2: " + auxTemperamentsResult.length);
             res.status(200).send(auxTemperamentsResult);
         }
         else
         {
-            console.log("Result 3: " + temperamentsResult.length);
+            //console.log("Result 3: " + temperamentsResult.length);
 
             res.status(200).send(temperamentsResult);
         }

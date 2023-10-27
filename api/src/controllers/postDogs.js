@@ -21,6 +21,11 @@ const postDogs = async (req, res) => {
             }
         });
 
+        if(created)
+        {
+            dog.addTemperaments(temperament);
+        }
+
         const auxResult = {
             isCreated: created,
             dog: dog

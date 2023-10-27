@@ -1,16 +1,16 @@
 import style from "./LandingPage.module.css"
 import React from "react";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
-
-    const handleHomePage = () => {
-        console.log("Press: Home page");
-     }
-
     return (
         <div className={style.landingPage}>
-            <h1>Landing Henry Dogss</h1>
-            <button className={style.minimalButton} onClick={handleHomePage}>home page</button>
+            <h1>HENRY DOGS PI</h1>
+            <Link to={`/home`}>
+                <button className={style.minimalButton}>
+                    Go Home
+                </button>
+            </Link>
         </div>
     );
 };

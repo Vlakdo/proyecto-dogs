@@ -73,12 +73,31 @@ const rootReducer = (state = initialState, action) => {
             }
 
             if(state.filterObject.temperamentOrder !== "none"){
-                const tempeFilter = state.filterObject.temperamentOrder;
+                const tempeFilter = state.filterObject.temperamentOrder.toLowerCase();
                 auxDogs = auxDogs.filter((dog) => {
                     if(dog.hasOwnProperty("temperament")){
-                        return dog.temperament.includes(tempeFilter);
+                        return dog.temperament.toLowerCase().includes(tempeFilter);
                     }
                 });
+            }
+
+            if(state.filterObject.origen !== "none"){
+                switch(state.filterObject.origen){
+                    case "API":
+                        auxDogs = auxDogs.filter((dog) => {
+                            if(!dog.hasOwnProperty("isDataBase")){
+                                return dog;
+                            }
+                        });
+                        break;
+                    case "DB":
+                        auxDogs = auxDogs.filter((dog) => {
+                            if(dog.hasOwnProperty("isDataBase")){
+                                return dog;
+                            }
+                        });
+                        break;
+                }
             }
             
             return { ...state, allDogs: auxDogs };
@@ -137,12 +156,31 @@ const rootReducer = (state = initialState, action) => {
             }
 
             if(state.filterObject.temperamentOrder !== "none"){
-                const tempeFilter = state.filterObject.temperamentOrder;
+                const tempeFilter = state.filterObject.temperamentOrder.toLowerCase();
                 auxDogsByName = auxDogsByName.filter((dog) => {
                     if(dog.hasOwnProperty("temperament")){
-                        return dog.temperament.includes(tempeFilter);
+                        return dog.temperament.toLowerCase().includes(tempeFilter);
                     }
                 });
+            }
+
+            if(state.filterObject.origen !== "none"){
+                switch(state.filterObject.origen){
+                    case "API":
+                        auxDogsByName = auxDogsByName.filter((dog) => {
+                            if(!dog.hasOwnProperty("isDataBase")){
+                                return dog;
+                            }
+                        });
+                        break;
+                    case "DB":
+                        auxDogsByName = auxDogsByName.filter((dog) => {
+                            if(dog.hasOwnProperty("isDataBase")){
+                                return dog;
+                            }
+                        });
+                        break;
+                }
             }
 
             return { ...state, allDogs: auxDogsByName };
@@ -153,7 +191,7 @@ const rootReducer = (state = initialState, action) => {
             {
                 auxFilter = { ...state.filterObject, [property]: action.payload[property]};
             }
-            
+            //console.log("auxFilter: " + JSON.stringify(auxFilter));
             return { ...state, filterObject: auxFilter};
             //break;
         case GET_TEMPERAMENTS:
