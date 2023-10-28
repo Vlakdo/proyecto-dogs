@@ -13,7 +13,7 @@ const SearchBar = (props) => {
     return (
         <div>
             <input type='search' onChange={handleChange}/>
-            <button onClick={() => onSearchDogs(id)}>Buscar</button>
+            <button onClick={() => onSearchDogs(id)}>Filtrar</button>
         </div>
     );
 }

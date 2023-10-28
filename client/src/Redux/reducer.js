@@ -56,7 +56,7 @@ const rootReducer = (state = initialState, action) => {
                     //const weightAverage = auxArray.length > 1 ? (parseInt(auxArray[0]) + parseInt(auxArray[1])) / 2 : parseInt(auxArray[0]);
                     const weightAverage = auxArray.length > 1 ? Math.round((parseInt(auxArray[0]) + parseInt(auxArray[1])) / 2) : parseInt(auxArray[0]);
 
-                    console.log(dog.name + ", auxArray[0]: " + auxArray[0] + ", auxArray[1]: " + auxArray[1] + ", weightAverage: " + weightAverage);
+                    //console.log(dog.name + ", auxArray[0]: " + auxArray[0] + ", auxArray[1]: " + auxArray[1] + ", weightAverage: " + weightAverage);
                     return {
                         ...dog,
                         weightAverage: weightAverage

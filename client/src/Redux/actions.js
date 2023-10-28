@@ -36,7 +36,8 @@ const getDogsByName = (name) => {
                 payload: data
             });
         } catch (error) {
-            window.alert(error.response.data.message);
+            //window.alert(error.response.data.message);
+            window.alert("No hay razas que contentan el texto buscado");
         }
     };
 };

@@ -58,7 +58,7 @@ const NavBar = (props) => {
                 </div>
                 <div>
                     <Link to={`/createDog`}>
-                        <button className={style.minimalButton}>
+                        <button>
                             Añadir raza
                         </button>
                     </Link>

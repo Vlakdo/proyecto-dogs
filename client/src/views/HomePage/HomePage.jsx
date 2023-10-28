@@ -15,8 +15,8 @@ const HomePage = () => {
     const dispatch = useDispatch();
 
     const handlerSetFilter = (event) => {
-        //console.log("Name: " + event.target.name);
-        //console.log("Value: " + event.target.value);
+        /*console.log("Name: " + event.target.name);
+        console.log("Value: " + event.target.value);*/
         const aux = {
             [event.target.name]: event.target.value
         };
@@ -49,6 +49,15 @@ const HomePage = () => {
             <Cards
                 dogs={dogs}
             />
+            {/*
+                dogs.length ? (
+                    <Cards
+                        dogs={dogs}
+                    />
+                    ) : (
+                        <h1>{textAlert}</h1>
+                )
+                    */}
         </div>
     );
 }
