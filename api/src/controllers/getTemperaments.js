@@ -30,7 +30,14 @@ const UnifyTemperamentsAndDeleteDuplicates = (temperamentsArray) => {
 
 const getTemperaments = async (req, res) => {
     try {
-        const temperamentsResult = await Temperaments.findAll();
+        const temperamentsResult = await Temperaments.findAll({
+            /*include: {
+                attributes: ["name"],
+                through: {
+                    attributes: []
+                }
+            }*/
+        });
         //console.log("Result 1: " + temperamentsResult.length);
         if(temperamentsResult.length === 0) {
             //console.log("Entro y creo: ");

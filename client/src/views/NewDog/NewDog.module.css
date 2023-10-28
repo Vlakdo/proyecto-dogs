@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    margin: 10px;
+}
+
+.formContainer {
+    width: 300px; /* Establece el ancho deseado para tu formulario */
+    margin: 0 auto; /* Centra el formulario horizontalmente en el contenedor padre */
+    text-align: left; /* Alinea el contenido del formulario a la izquierda */
+}
+
+.minimalButton {
+    background-color: transparent; /* Fondo transparente */
+    border: 1px solid #000; /* Borde del botón */
+    color: #000; /* Color del texto */
+    padding: 8px 16px; /* Espaciado interno del botón */
+    font-size: 16px; /* Tamaño de fuente */
+    cursor: pointer; /* Cambiar el cursor al pasar por encima */
+    transition: background-color 0.3s, color 0.3s, border 0.3s; /* Agregar transiciones suaves */
+  
+    /* Puedes agregar estilos adicionales, como bordes redondeados, márgenes, etc. */
+  }

@@ -3,6 +3,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import { useEffect } from "react";
 //import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 //import axios from 'axios';
 import { getTemperaments } from "../../Redux/actions";
@@ -26,12 +27,12 @@ const NavBar = (props) => {
             <div className={style.NavBarFilters}>
                 <div>
                     <label htmlFor="temperaments">Temperamentos: </label>
-                    <select onChange={handlerSetFilter}>
-                        <option value={`{"temperamentOrder": "none"}`}>None</option>
+                    <select name="temperamentOrder" onChange={handlerSetFilter}>
+                        <option value="none">None</option>
                         {
                             temperaments.map((tempe) => {
                                 return (
-                                    <option value={`{"temperamentOrder": "${tempe.name}"}`}>{tempe.name}</option>
+                                    <option value={tempe.name}>{tempe.name}</option>
                                 );
                             })
                         }
@@ -39,21 +40,28 @@ const NavBar = (props) => {
                 </div>
                 <div>
                     <label htmlFor="Origen">Origen: </label>
-                    <select onChange={handlerSetFilter}>
-                        <option value={`{"origen": "none"}`}>None</option>
-                        <option value={`{"origen": "API"}`}>API</option>
-                        <option value={`{"origen": "DB"}`}>DB</option>
+                    <select name="origen" onChange={handlerSetFilter}>
+                        <option value="none">None</option>
+                        <option value="API">API</option>
+                        <option value="DB">DB</option>
                     </select>
                 </div>
                 <div>
                     <label htmlFor="Orden">Orden: </label>
-                    <select onChange={handlerSetFilter}>
-                        <option value={`{"order": "none"}`}>None</option>
-                        <option value={`{"order": "R_A"}`}>Raza ascendente</option>
-                        <option value={`{"order": "R_D"}`}>Raza descendente</option>
-                        <option value={`{"order": "P_A"}`}>Peso ascendente</option>
-                        <option value={`{"order": "P_D"}`}>Peso descendente</option>
+                    <select name="order" onChange={handlerSetFilter}>
+                        <option value="none">None</option>
+                        <option value="R_A">Raza ascendente</option>
+                        <option value="R_D">Raza descendente</option>
+                        <option value="P_A">Peso ascendente</option>
+                        <option value="P_D">Peso descendente</option>
                     </select>
+                </div>
+                <div>
+                    <Link to={`/createDog`}>
+                        <button className={style.minimalButton}>
+                            Añadir raza
+                        </button>
+                    </Link>
                 </div>
                 {/*<div>
                     <label htmlFor="Raza">Raza: </label>

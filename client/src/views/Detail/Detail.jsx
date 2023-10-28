@@ -32,7 +32,7 @@ const Detail = () => {
                 <div>
                     <Link to={`/home`}>
                         <button className={style.minimalButton}>
-                            Back Home
+                            Ir a Home
                         </button>
                     </Link>
                 </div>
@@ -42,15 +42,29 @@ const Detail = () => {
                         <p><span className={style.subrayado}>ID:</span> {dog.id}</p>
                         <p><span className={style.subrayado}>Temperamento:</span> {dog.temperament}</p>
                         <p className={style.leftParagraph}><span className={style.subrayado}>Peso:</span></p>
-                        <ul className={style.leftParagraph}>
-                            <li>Imperial: {dog.weight.imperial}</li>
-                            <li>Metric: {dog.weight.metric}</li>
-                        </ul>
+                        {
+                            dog.weight.imperial !== "" ?
+                            <ul className={style.leftParagraph}>
+                                <li>Imperial: {dog.weight.imperial}</li>
+                                <li>Metric: {dog.weight.metric}</li>
+                            </ul>
+                            :
+                            <ul className={style.leftParagraph}>
+                                <li>Metric: {dog.weight.metric}</li>
+                            </ul>
+                        }
                         <p className={style.leftParagraph}><span className={style.subrayado}>Altura:</span></p>
-                        <ul className={style.leftParagraph}>
-                            <li>Imperial: {dog.height.imperial}</li>
-                            <li>Metric: {dog.height.metric}</li>
-                        </ul>
+                        {
+                            dog.height.imperial !== "" ?
+                            <ul className={style.leftParagraph}>
+                                <li>Imperial: {dog.height.imperial}</li>
+                                <li>Metric: {dog.height.metric}</li>
+                            </ul>
+                            :
+                            <ul className={style.leftParagraph}>
+                                <li>Metric: {dog.height.metric}</li>
+                            </ul>
+                        }
                         <p><span className={style.subrayado}>Años de vida:</span> {dog.life_span}</p>
                 </div>
             </div>

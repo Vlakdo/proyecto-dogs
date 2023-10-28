@@ -15,7 +15,11 @@ const HomePage = () => {
     const dispatch = useDispatch();
 
     const handlerSetFilter = (event) => {
-        const aux = JSON.parse(event.target.value);
+        //console.log("Name: " + event.target.name);
+        //console.log("Value: " + event.target.value);
+        const aux = {
+            [event.target.name]: event.target.value
+        };
         dispatch(setFilters(aux));
         //setAux(!aux);
     }
