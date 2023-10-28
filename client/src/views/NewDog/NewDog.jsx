@@ -24,15 +24,12 @@ const NewDog = () => {
   });
 
   const [errors, setErrors] = useState({
-      nombre: "",
-      alturaMinima: "",
-      alturaMaxima: "",
-      pesoMinimo: "",
-      pesoMaximo: "",
-      aniosMinimo: "",
-      aniosMaximo: "",
-      temperamento: "",
-      imagenUrl: ""
+      nombre: " ",
+      alturas: " ",
+      pesos: " ",
+      anios: " ",
+      temperamento: " ",
+      imagenUrl: " "
   });
 
   const handleSelectTempeChange = (event) => {
@@ -46,14 +43,15 @@ const NewDog = () => {
     {
       if (auxTempe && !razaData.temperamento.some(tempe => tempe.id === auxTempe.id)) {
         setRazaData({...razaData, ["temperamento"]: [...razaData.temperamento, auxTempe]});
+        validate({...razaData, ["temperamento"]: [...razaData.temperamento, auxTempe]}, setErrors, errors, razaData);
       }
     }
   };
 
-  
   const handleRemoveTempe = (tempeName) => {
     const updatedTempe = razaData.temperamento.filter((tempe) => tempe.name !== tempeName);
     setRazaData({...razaData, ["temperamento"]: updatedTempe});
+    validate({...razaData, ["temperamento"]: updatedTempe}, setErrors, errors, razaData);
   };
 
   const postNewDog = async (newDogBody) => {
@@ -82,29 +80,46 @@ const NewDog = () => {
     const property = event.target.name;
     const value = event.target.value;
 
+    //console.log("property: " + property + ", value: " + value)
+
     setRazaData({...razaData, [property]: value});
-    validate({...razaData, [property]: value}, setErrors, errors);
+    validate({...razaData, [property]: value}, setErrors, errors, razaData);
 }
 
   const handleSubmit = (event) => {
+
     event.preventDefault();
 
-    const razaBody = {
-        name: razaData.nombre,
-        height:{
-            imperial: "",
-            metric: razaData.alturaMinima + " - " + razaData.alturaMaxima + " cm"
-        },
-        weight:{
-            imperial: "",
-            metric: razaData.pesoMinimo + " - " + razaData.pesoMaximo + " kg"
-        },
-        life_span: razaData.aniosMinimo + " - " + razaData.aniosMaximo + " years",
-        temperament: razaData.temperamento.map(tempe => Number(tempe.id)),//[1,3,4,7,20],
-        image: razaData.imagenUrl
-    };
-    console.log("OBJETO PARA ENVIAR: " + JSON.stringify(razaBody));
-    postNewDog(razaBody);
+    let formIsCorrect = true;
+    for(let prop in errors){
+      if(errors[prop] !== ""){
+        formIsCorrect = false;
+        break;
+      }
+    }
+
+    if(formIsCorrect){
+      //event.preventDefault();
+
+      const razaBody = {
+          name: razaData.nombre,
+          height:{
+              imperial: "",
+              metric: razaData.alturaMinima + " - " + razaData.alturaMaxima + " cm"
+          },
+          weight:{
+              imperial: "",
+              metric: razaData.pesoMinimo + " - " + razaData.pesoMaximo + " kg"
+          },
+          life_span: razaData.aniosMinimo + " - " + razaData.aniosMaximo + " years",
+          temperament: razaData.temperamento.map(tempe => Number(tempe.id)),//[1,3,4,7,20],
+          image: razaData.imagenUrl
+      };
+      //console.log("OBJETO BODY PARA ENVIAR: " + JSON.stringify(razaBody));
+      postNewDog(razaBody);
+    } else {
+      window.alert("Hay datos pendientes o incorrectos");
+    }
   };
 
   useEffect(() => {
@@ -137,6 +152,8 @@ const NewDog = () => {
               onChange={handleChange}
               required //Indica que este campo es obligatorio
             />
+            <br/>
+            <span className={style.error}>{errors.nombre}</span>
           </div>
           <br/>
           <label htmlFor="altura"><strong>Altura</strong></label>
@@ -144,6 +161,7 @@ const NewDog = () => {
             <label htmlFor="alturaMinima">Mínima (cm): </label>
             <input
               type="number"
+              min="0"
               name="alturaMinima"
               value={razaData.alturaMinima}
               onChange={handleChange}
@@ -153,10 +171,13 @@ const NewDog = () => {
             <label htmlFor="alturaMaxima">Máxima (cm): </label>
             <input
               type="number"
+              min="0"
               name="alturaMaxima"
               value={razaData.alturaMaxima}
               onChange={handleChange}
             />
+            <br/>
+            <span className={style.error}>{errors.alturas}</span>
           </div>
           <br/>
           <label htmlFor="peso"><strong>Peso</strong></label>
@@ -164,6 +185,7 @@ const NewDog = () => {
             <label htmlFor="pesoMinimo">Mínimo (kg): </label>
             <input
               type="number"
+              min="0"
               name="pesoMinimo"
               value={razaData.pesoMinimo}
               onChange={handleChange}
@@ -173,10 +195,13 @@ const NewDog = () => {
             <label htmlFor="pesoMaximo">Máximo (kg): </label>
             <input
               type="number"
+              min="0"
               name="pesoMaximo"
               value={razaData.pesoMaximo}
               onChange={handleChange}
             />
+            <br/>
+            <span className={style.error}>{errors.pesos}</span>
           </div>
           <br/>
           <label htmlFor="anios"><strong>Años de vida</strong></label>
@@ -184,6 +209,7 @@ const NewDog = () => {
             <label htmlFor="anioMinimo">Mínimo (años): </label>
             <input
               type="number"
+              min="0"
               name="aniosMinimo"
               value={razaData.aniosMinimo}
               onChange={handleChange}
@@ -193,10 +219,13 @@ const NewDog = () => {
             <label htmlFor="anioMaximo">Máximo (años): </label>
             <input
               type="number"
+              min="0"
               name="aniosMaximo"
               value={razaData.aniosMaximo}
               onChange={handleChange}
             />
+            <br/>
+            <span className={style.error}>{errors.anios}</span>
           </div>
           <br/>
           <div className="form-group">
@@ -208,6 +237,8 @@ const NewDog = () => {
               onChange={handleChange}
               required
             />
+            <br/>
+            <span className={style.error}>{errors.imagenUrl}</span>
           </div>
           <br/>
           <label htmlFor="temperamentos">Temperamentos: </label>
@@ -221,6 +252,8 @@ const NewDog = () => {
                 </option>
               ))}
           </select>
+          <br/>
+          <span className={style.error}>{errors.temperamento}</span>
           <br/>
           <h4>Temperamentos seleccionados:</h4>
           <ul>

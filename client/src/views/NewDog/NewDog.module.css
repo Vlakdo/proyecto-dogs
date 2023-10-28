@@ -23,3 +23,7 @@
   
     /* Puedes agregar estilos adicionales, como bordes redondeados, márgenes, etc. */
   }
+
+  .error {
+    color: red;
+  }
